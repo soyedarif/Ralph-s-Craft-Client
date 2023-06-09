@@ -1,5 +1,5 @@
 
-const AuthProviders = () => {
+const PrivateRoute = ({children}) => {
     return (
         <div>
             
@@ -7,4 +7,4 @@ const AuthProviders = () => {
     );
 };
 
-export default AuthProviders;
+export default PrivateRoute;

@@ -1,21 +1,31 @@
+import { Link, NavLink } from "react-router-dom";
+import logo from "../../assets/website-logo.png";
+import useAuth from "../../hooks/useAuth";
+
 const NavigationBar = () => {
-    const navOptions=(
-        <>
-         <li>
-              <a>Item re</a>
-            </li>
-            <li>
-              <a>Item re</a>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-        </>
-    )
+    const { user, logOut, loading } = useAuth();
+    const handleLogout = () => {
+        logOut()
+          .then(() => {})
+          .catch(erorr => console.log(erorr));
+      };
+  const navOptions = (
+    <>
+      <li>
+        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/instructors">Instructor</NavLink>
+      </li>
+      <li>
+        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/classes">Classes</NavLink>
+      </li>
+    </>
+  );
   return (
-    <div>
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
+    <>
+      <div className="navbar p-1 text-white fixed z-10 bg-black bg-opacity-60 max-w-screen-xl">
+        <div className="navbar-start ml-6">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,21 +33,36 @@ const NavigationBar = () => {
               </svg>
             </label>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-             {navOptions}
+              {navOptions}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <Link to="/" className="w-2/12">
+            <img src={logo} alt="website-logo" title="Ralph Crafts" />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-           {navOptions}
-          </ul>
+          <ul className="menu menu-horizontal px-1 text-base space-x-4">{navOptions}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end mr-6">
+        <div className="avatar mr-4">
+            <div className="w-12 rounded-full">{loading || (user && <img src={user?.photoURL} />)}</div>
+          </div>
+          {  user ? (
+        <>
+          <button onClick={handleLogout} className="btn btn-ghost">
+            LogOut
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
