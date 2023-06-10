@@ -4,8 +4,8 @@ import "./Dashboard.css";
 import logo from '../../assets/website-logo.png'
 
 const Dashboard = () => {
-  const isAdmin = false;
-  const isInstructor = true;
+  const isAdmin = true;
+  const isInstructor = false;
   return (
     <>
       <div className="drawer lg:drawer-open">
@@ -32,7 +32,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to="manageUsers">
                     <FaUserEdit /> Manage Users
                   </NavLink>
                 </li>
@@ -72,7 +72,7 @@ const Dashboard = () => {
 
             <div className="divider"></div>
             <li>
-              <NavLink>
+              <NavLink to='/'>
                 <FaHome /> Home
               </NavLink>
             </li>
