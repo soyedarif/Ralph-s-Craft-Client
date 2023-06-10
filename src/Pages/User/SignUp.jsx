@@ -1,17 +1,49 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const SignUp = () => {
   const { createNewUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
     watch,
   } = useForm();
   const onSubmit = data => {
+    console.log(data);
     createNewUser(data.email, data.password)
       .then(result => {
-        console.log(result.user);
+        const createdUser = result.user;
+        console.log(createdUser);
+        updateUserProfile();
+        updateUserProfile(data.name, data.photoURL).then(() => {
+          const savedUser = { name: data.name, email: data.email, photoURL: data.photoURL };
+          fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(savedUser),
+          })
+          .then(res => res.json())
+          .then(data=>{
+            if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "New User Created",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+            }
+            navigate("/");
+          })
+        });
       })
       .catch(error => console.log(error));
   };
@@ -70,6 +102,11 @@ const SignUp = () => {
                 <input className="btn btn-primary" type="submit" value="Register" />
               </div>
             </form>
+            <p>
+              <small>
+                Already an User? <Link to="/login">Login</Link>
+              </small>
+            </p>
           </div>
         </div>
       </div>

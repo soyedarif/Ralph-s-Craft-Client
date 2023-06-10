@@ -15,11 +15,16 @@ const NavigationBar = () => {
         <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/instructors">Instructor</NavLink>
+        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/instructors">Instructors</NavLink>
       </li>
       <li>
         <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/classes">Classes</NavLink>
       </li>
+      {
+        user && <li>
+        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/dashboard">Dashboard</NavLink>
+      </li>
+      }
     </>
   );
   return (
@@ -56,7 +61,7 @@ const NavigationBar = () => {
       ) : (
         <>
           <li>
-            <Link to="/login">Login</Link>
+            <Link className="btn btn-ghost" to="/login">Login</Link>
           </li>
         </>
       )}
