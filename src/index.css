@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.active{
+/* .active{
     border-bottom: 4px solid #D71D24;
     background-color: transparent;
+    border-radius: 0;
+} */
+
+.user-login li:hover a{
+    color: #D71D24 !important;
+}
+
+li:hover a{
+    color: aliceblue !important;
+}
+
+a.active{
+    color: aliceblue !important;
+    border-bottom: 1px solid #D71D24;
 }

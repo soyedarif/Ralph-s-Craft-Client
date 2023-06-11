@@ -1,35 +1,44 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/website-logo.png";
 import useAuth from "../../hooks/useAuth";
+import { FaSignInAlt } from "react-icons/fa";
 
 const NavigationBar = () => {
-    const { user, logOut, loading } = useAuth();
-    const handleLogout = () => {
-        logOut()
-          .then(() => {})
-          .catch(erorr => console.log(erorr));
-      };
+  const { user, logOut, loading } = useAuth();
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch(erorr => console.log(erorr));
+  };
   const navOptions = (
     <>
-      <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/">Home</NavLink>
+      <li className="">
+        <NavLink className="" to="/">
+          Home
+        </NavLink>
       </li>
-      <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/instructors">Instructors</NavLink>
+      <li className="">
+        <NavLink className="" to="/instructors">
+          Instructors
+        </NavLink>
       </li>
-      <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/classes">Classes</NavLink>
+      <li className="">
+        <NavLink className="" to="/classes">
+          Classes
+        </NavLink>
       </li>
-      {
-        user && <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "")} to="/dashboard">Dashboard</NavLink>
-      </li>
-      }
+      {user && (
+        <li className="">
+          <NavLink className="" to="/dashboard">
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
     <>
-      <div className="navbar p-1 text-white fixed z-10 bg-black bg-opacity-60 max-w-screen-xl">
+      <div className="navbar p-2 text-black fixed z-10 bg-base-200 bg-opacity-60 max-w-screen-xl">
         <div className="navbar-start ml-6">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -37,34 +46,40 @@ const NavigationBar = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabIndex={0} className="menu main-manu font-semibold text-base menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               {navOptions}
             </ul>
           </div>
           <Link to="/" className="w-2/12">
-            <img src={logo} alt="website-logo" title="Ralph Crafts" />
+            <img src={logo} alt="website-logo" title="Ralph Crafts" /> 
           </Link>
+          <span className="font-semibold text-xl">Ralph Crafts</span>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-base space-x-4">{navOptions}</ul>
+          <ul className="menu main-manu font-semibold text-base menu-horizontal px-1 space-x-4">{navOptions}</ul>
         </div>
         <div className="navbar-end mr-6">
-        <div className="avatar mr-4">
+         
+          <div className="avatar mr-4">
             <div className="w-12 rounded-full">{loading || (user && <img src={user?.photoURL} />)}</div>
           </div>
-          {  user ? (
-        <>
-          <button onClick={handleLogout} className="btn btn-ghost">
-            LogOut
-          </button>
-        </>
-      ) : (
-        <>
-          <li>
-            <Link className="btn btn-ghost" to="/login">Login</Link>
-          </li>
-        </>
-      )}
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost m-1 hover:text-[#D71D24] text-2xl">
+              <FaSignInAlt />
+            </label>
+            <ul tabIndex={0} className="dropdown-content user-login menu p-2 shadow bg-base-100 rounded-box w-40 text-black text-center">
+              <li>{user ? <a className="text-center uppercase">Welcome {user?.displayName}</a> : <Link to="/login">Login</Link>}</li>
+              <li>
+                {user ? (
+                  <button onClick={handleLogout} className="btn btn-ghost btn-sm">
+                    LogOut
+                  </button>
+                ) : (
+                  <Link to="/signup">Register</Link>
+                )}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </>
