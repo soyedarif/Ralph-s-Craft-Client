@@ -68,7 +68,7 @@ const NavigationBar = () => {
               <FaSignInAlt />
             </label>
             <ul tabIndex={0} className="dropdown-content user-login menu p-2 shadow bg-base-100 rounded-box w-40 text-black text-center">
-              <li>{user ? <a className="text-center uppercase">Welcome {user?.displayName}</a> : <Link to="/login">Login</Link>}</li>
+              <li>{user ? <a className="text-center uppercase">{user?.displayName}</a> : <Link to="/login">Login</Link>}</li>
               <li>
                 {user ? (
                   <button onClick={handleLogout} className="btn btn-ghost btn-sm">

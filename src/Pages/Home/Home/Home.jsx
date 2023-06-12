@@ -1,10 +1,11 @@
 import Banner from "../Banner/Banner";
+import PopularInstructors from "../PopularInstructors/PopularInstructors";
 
 const Home = () => {
   return (
     <>
       <Banner></Banner>
-      <h2>This is HOME</h2>
+      <PopularInstructors></PopularInstructors>
     </>
   );
 };

@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxios";
 import { FaUserGraduate, FaUserSecret } from "react-icons/fa";
-import { useState } from "react";
 import { toast } from "react-toastify";
 
 const AllUsers = () => {

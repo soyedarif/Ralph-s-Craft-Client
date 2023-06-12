@@ -10,7 +10,6 @@ import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
   const {user}=useAuth()
-  console.log(user);
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   return (
@@ -51,7 +50,7 @@ const Dashboard = () => {
             ) : isInstructor ? (
               <>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to="addClass">
                     <FaPlus /> Add A Class
                   </NavLink>
                 </li>

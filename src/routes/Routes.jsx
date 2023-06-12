@@ -8,6 +8,7 @@ import SignUp from "../Pages/User/SignUp";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../Pages/Dashboard/admin/AllUsers";
+import AddaClass from "../Pages/Dashboard/instructor/AddaClass";
 
 export const router = createBrowserRouter([
     {
@@ -44,9 +45,12 @@ export const router = createBrowserRouter([
             {
                 path:'manageUsers',
                 element: <AllUsers></AllUsers>
-            }
+            },
             //instructor
-
+                {
+                    path:'addClass',
+                    element:<AddaClass></AddaClass>
+                },
             //user
         ]
     }
