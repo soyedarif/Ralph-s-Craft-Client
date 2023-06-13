@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const AddaClass = () => {
     const {user}=useAuth()
     const [axiosSecure]=useAxiosSecure()
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset } = useForm();
   const onSubmit = data =>{
     const newCourse={
         course:data.class,

@@ -9,49 +9,67 @@ import Dashboard from "../Layouts/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../Pages/Dashboard/admin/AllUsers";
 import AddaClass from "../Pages/Dashboard/instructor/AddaClass";
+import MyClasses from "../Pages/Dashboard/instructor/MyClasses";
+import ManageClasses from "../Pages/Dashboard/admin/ManageClasses";
 
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      children:[
-        {
-            path:'/',
-            element: <Home></Home>
-        },
-        {
-            path:'/instructors',
-            element: <Instructors></Instructors>
-        },
-        {
-            path: '/classes',
-            element: <PrivateRoute><Classes></Classes></PrivateRoute>
-        },
-        {
-            path:'/login',
-            element: <Login></Login>
-        },
-        {
-            path: '/signup',
-            element: <SignUp></SignUp>
-        }
-      ]
-    },
-    {
-        path:'dashboard',
-        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        children:[
-            //admin
-            {
-                path:'manageUsers',
-                element: <AllUsers></AllUsers>
-            },
-            //instructor
-                {
-                    path:'addClass',
-                    element:<AddaClass></AddaClass>
-                },
-            //user
-        ]
-    }
-  ]);
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/instructors",
+        element: <Instructors></Instructors>,
+      },
+      {
+        path: "/classes",
+        element: (
+          <PrivateRoute>
+            <Classes></Classes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      //admin
+      {
+        path: "manageUsers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "manageClasses",
+        element: <ManageClasses></ManageClasses>,
+      },
+      //instructor
+      {
+        path: "addClass",
+        element: <AddaClass></AddaClass>,
+      },
+      {
+        path: "myClasses",
+        element: <MyClasses></MyClasses>,
+      },
+      //user
+    ],
+  },
+]);

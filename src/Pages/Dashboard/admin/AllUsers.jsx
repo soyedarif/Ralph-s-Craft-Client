@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxios";
 import { FaUserGraduate, FaUserSecret } from "react-icons/fa";
 import { toast } from "react-toastify";
+import SectionHeader from "../../../components/SectionHeader";
 
 const AllUsers = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -48,8 +49,8 @@ const AllUsers = () => {
     });
   };
   return (
-    <div>
-      <h2 className="text-5xl font-medium text-center">Manage All Users</h2>
+    <>
+      <SectionHeader header='Manage All Users'></SectionHeader>
       <div className="overflow-x-auto">
         <table className="table w-full">
           {/* head */}
@@ -96,7 +97,7 @@ const AllUsers = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 };
 

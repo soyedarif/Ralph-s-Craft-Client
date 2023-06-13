@@ -37,7 +37,7 @@ const Dashboard = () => {
             {isAdmin ? (
               <>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to="manageClasses">
                     <FaBookReader /> Manage Classes
                   </NavLink>
                 </li>
@@ -55,7 +55,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to="myClasses">
                     <FaBook /> My Classes
                   </NavLink>
                 </li>
