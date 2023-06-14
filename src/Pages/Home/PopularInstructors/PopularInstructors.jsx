@@ -5,7 +5,7 @@ import Instructor from "./Instructor";
 const PopularInstructors = () => {
     const { data: instructors = [] } = useQuery(['instructors'], async () => {
         const limit = 6; // Define the limit variable
-        const response = await fetch(`http://localhost:5000/instructors?limit=${limit}`);
+        const response = await fetch(`https://ralph-crafts-server.vercel.app/instructors?limit=${limit}`);
         const data = await response.json();
         return data;
       });
