@@ -51,7 +51,7 @@ const Login = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="text" placeholder="password" className="input input-bordered" {...register("password", { required: true })} />
+                <input type="password" placeholder="password" className="input input-bordered" {...register("password", { required: true })} />
                 <label className="label">{errors.password && <span>{errors.password.message}</span>}</label>
               </div>
               <div className="form-control mt-6">
