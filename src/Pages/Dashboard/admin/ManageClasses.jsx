@@ -101,10 +101,7 @@ const ManageClasses = () => {
                   <button disabled={course.status == "approved" || course.status == "denied"} onClick={() => handleDenied(course)} className="btn bg-red-500 text-white hover:text-black btn-xs">
                     Deny
                   </button>
-                  <button onClick={()=>{
-                    window.my_modal_3.showModal()
-                    setUpdateId(course._id)
-                }} className="btn btn-ghost btn-xs">Feedback</button>
+                  <label htmlFor="my_modal_7" onClick={()=>setUpdateId(course._id)} className="btn btn-ghost btn-xs">Feedback</label>
                 </td>
               </tr>
             ))}
