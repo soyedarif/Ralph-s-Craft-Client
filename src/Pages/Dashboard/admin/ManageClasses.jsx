@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/useAxios";
 import SectionHeader from "../../../components/SectionHeader";
 import { toast } from "react-toastify";
 import FeedBack from "./FeedBack";
 import { useState } from "react";
 
 const ManageClasses = () => {
-  const [axiosSecure] = useAxiosSecure();
-  const [updateId,setUpdateId]=useState(null)
+  const [axiosSecure] = useAxios();
+  const [updateId, setUpdateId] = useState(null);
 
   const { data: classes = [], refetch } = useQuery(["manageClasses"], async () => {
     const res = await axiosSecure.get("/classes");
@@ -50,9 +50,6 @@ const ManageClasses = () => {
       }
     });
   };
-
-  
-
 
   return (
     <>
@@ -101,7 +98,9 @@ const ManageClasses = () => {
                   <button disabled={course.status == "approved" || course.status == "denied"} onClick={() => handleDenied(course)} className="btn bg-red-500 text-white hover:text-black btn-xs">
                     Deny
                   </button>
-                  <label htmlFor="my_modal_7" onClick={()=>setUpdateId(course._id)} className="btn btn-ghost btn-xs">Feedback</label>
+                  <label htmlFor="my_modal_7" onClick={() => setUpdateId(course._id)} className="btn btn-ghost btn-xs">
+                    Feedback
+                  </label>
                 </td>
               </tr>
             ))}

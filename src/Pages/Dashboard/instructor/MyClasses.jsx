@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/useAxios";
 import SectionHeader from "../../../components/SectionHeader";
 
 const MyClasses = () => {
-  const { user, loading } = useAuth();
-  const [axiosSecure] = useAxiosSecure();
+  const { user, userLoading } = useAuth();
+  const [axiosSecure] = useAxios();
   const { data: myClasses = [] } = useQuery({
     queryKey: ["myClasses", user?.email],
-    enabled: !loading,
+    enabled: !userLoading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/classes?email=${user?.email}`);
       return res.data;
@@ -27,7 +27,7 @@ const MyClasses = () => {
               <h2 className="card-title">{course.course}</h2>
               <p>Status: {course.status}</p>
               <p>Student Enrolled: {course?.enrolled || 0}</p>
-              <p>FeedBack: {course?.feedback || ''}</p>
+              <p>FeedBack: {course?.feedback || ""}</p>
               <div className="card-actions justify-end">
                 <button className="btn bg-red-600 text-white hover:text-black">Update</button>
               </div>

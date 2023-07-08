@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import useAxiosSecure from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/useAxios";
 import { toast } from "react-toastify";
 
 const FeedBack = ({ updateId }) => {
-  const [axiosSecure] = useAxiosSecure();
-  const { register, handleSubmit,reset } = useForm();
+  const [axiosSecure] = useAxios();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = async data => {
     const response = await axiosSecure.patch(`/classes/feedback/${updateId}`, {
       feedback: data.message,
@@ -20,7 +20,7 @@ const FeedBack = ({ updateId }) => {
         progress: undefined,
         theme: "light",
       });
-      reset()
+      reset();
     }
   };
   return (

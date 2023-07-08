@@ -8,18 +8,18 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [userLoading, setUserLoading] = useState(true);
 
   const createNewUser = (email, password) => {
-    setLoading(true);
+    setUserLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const login = (email, password) => {
-    setLoading(true);
+    setUserLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const logOut = () => {
-    setLoading(true);
+    setUserLoading(true);
     return signOut(auth);
   };
   const updateUserProfile = (name, photo) => {
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         axios.post(`https://ralph-crafts-server.vercel.app/jwt`, { email: currentUser.email }).then(data => {
           localStorage.setItem("access-token", data.data.token);
-          setLoading(false);
+          setUserLoading(false);
         });
       } else {
         localStorage.removeItem("access-token");
@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
-    loading,
+    userLoading,
     createNewUser,
     updateUserProfile,
     login,

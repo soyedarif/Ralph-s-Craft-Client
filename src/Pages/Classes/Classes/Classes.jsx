@@ -16,7 +16,7 @@ const Classes = () => {
 
   return (
     <>
-      <div className="grid md:grid-rows-2 gap-4 lg:grid-cols-3 mt-20">
+      <div className="grid md:grid-rows-2 gap-4 lg:grid-cols-3">
         {courses.map(course => (
           <div key={course._id} className="card w-96 bg-base-100 shadow-xl bg-gradient-to-t from-red-400 to-red-200">
             <div className="card-body">

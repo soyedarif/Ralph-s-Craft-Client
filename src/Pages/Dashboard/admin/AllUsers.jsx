@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/useAxios";
 import { FaUserGraduate, FaUserSecret } from "react-icons/fa";
 import { toast } from "react-toastify";
 import SectionHeader from "../../../components/SectionHeader";
 
 const AllUsers = () => {
-  const [axiosSecure] = useAxiosSecure();
+  const [axiosSecure] = useAxios();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await axiosSecure.get("/users");
     return res.data;
@@ -25,7 +25,6 @@ const AllUsers = () => {
           progress: undefined,
           theme: "light",
         });
-        
       }
     });
   };
@@ -44,13 +43,12 @@ const AllUsers = () => {
           progress: undefined,
           theme: "light",
         });
-        
       }
     });
   };
   return (
     <>
-      <SectionHeader header='Manage All Users'></SectionHeader>
+      <SectionHeader header="Manage All Users"></SectionHeader>
       <div className="overflow-x-auto">
         <table className="table w-full">
           {/* head */}

@@ -1,90 +1,98 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaBook, FaBookReader, FaDoorOpen, FaHome, FaPlus, FaUserEdit } from "react-icons/fa";
 import "./Dashboard.css";
-import logo from '../../assets/website-logo.png'
-import { ToastContainer } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-import useAdmin from "../../hooks/useAdmin";
-import useInstructor from "../../hooks/useInstructor";
+import logo from "../../assets/website-logo.png";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import useAuth from "../../hooks/useAuth";
+import useUserRole from "../../hooks/useUserRole";
+import { MdNightsStay, MdWbSunny } from "react-icons/md";
+import useDarkMode from "../../hooks/userDarkMode";
 
 const Dashboard = () => {
-  const {user}=useAuth()
-  const [isAdmin] = useAdmin();
-  const [isInstructor] = useInstructor();
+  const { darkMode, toggleMode } = useDarkMode();
+  const { user, userLoading } = useAuth();
+  const { role, isRoleLoading } = useUserRole();
+  if (userLoading || isRoleLoading) return <progress className="progress w-56"></progress>;
   return (
     <>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content ">
-          <label htmlFor="my-drawer-2" className="btn btn-ghost drawer-button lg:hidden">
-            <FaDoorOpen /> Open Sidebar
+        <div className="drawer-content flex flex-col items-center justify-center">
+          <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
+            Open drawer
           </label>
-          <Outlet></Outlet>
+          {/* Page content here */}
+          <Outlet />
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 h-full text-lg font-medium text-black bg-gradient-to-r from-base-100 to-[#D71D24]">
-            {/* Sidebar content here */}
-            <figure className="flex items-center">
-              <img className="w-4/12" src={logo} alt="" />
-              <h2 className="">Ralph Crafts</h2>
-            </figure>
-              <div className="text-center mb-4">
-                <img className="w-32 rounded-full h-32 mx-auto object-cover" src={user.photoURL} alt="" />
-                <h2 >Name: {user.displayName}</h2>
+          <ul className="menu p-4 w-80 h-full bg-gradient-to-b dark:from-black from-base-300 dark:via-black  via-base-300 dark:to-[#DA4453] to-[#DA4453] dark:text-slate-200 text-base-content">
+            <div className="flex justify-between">
+              <div className="flex items-center">
+                <div className="w-10 h-10 grid place-content-center">
+                  <img src={logo} alt="" />
+                </div>
+                <h2 className="text-2xl font-inter grid tracking-tighter place-content-center font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#DA4453] to-[#89216B]">RalphCrafts</h2>
               </div>
-            {isAdmin ? (
+              <div className="bg-slate-500 p-1 rounded-full text-white" onClick={toggleMode}>
+                {darkMode ? <MdWbSunny size={30} /> : <MdNightsStay size={30} />}
+              </div>
+            </div>
+            {/* user */}
+            <div className="flex flex-col gap-3 p-4 mb-4 items-center rounded-md">
+              <div className="mask mask-squircle w-20 h-20">
+                <img src={user?.photoURL} />
+              </div>
+              <div>
+                <h3 className="font-bold text-lg">{user?.displayName}</h3>
+                <p className="opacity-60 text-base uppercase">{role}</p>
+              </div>
+            </div>
+            {/* Sidebar content here */}
+            {role === "admin" && (
               <>
                 <li>
-                  <NavLink to="manageClasses">
-                    <FaBookReader /> Manage Classes
-                  </NavLink>
+                  <NavLink to="/dashboard/manageClasses">Manage Classes</NavLink>
                 </li>
                 <li>
-                  <NavLink to="manageUsers">
-                    <FaUserEdit /> Manage Users
-                  </NavLink>
-                </li>
-              </>
-            ) : isInstructor ? (
-              <>
-                <li>
-                  <NavLink to="addClass">
-                    <FaPlus /> Add A Class
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="myClasses">
-                    <FaBook /> My Classes
-                  </NavLink>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <NavLink to="/">
-                    <FaHome /> Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/">
-                    <FaHome /> Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/">
-                    <FaHome /> Home
-                  </NavLink>
+                  <NavLink to="/dashboard/manageUsers">Manage Users</NavLink>
                 </li>
               </>
             )}
+            {role === "instructor" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/myClasses">My Classes</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/addClass">Add A Class</NavLink>
+                </li>
+              </>
+            )}
+            {role === "student" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/enrolledClasses">My Enrolled Classes</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/selectedClasses">My Selected Classes</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/paymentHistory">Payment History</NavLink>
+                </li>
+              </>
+            )}
+            <div className="divider" />
 
-            <div className="divider"></div>
             <li>
-              <NavLink to='/'>
-                <FaHome /> Home
-              </NavLink>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/instructors">Instructors</NavLink>
+            </li>
+            <li>
+              <NavLink to="/classes">Classes</NavLink>
             </li>
           </ul>
         </div>

@@ -11,6 +11,14 @@ import AllUsers from "../Pages/Dashboard/admin/AllUsers";
 import AddaClass from "../Pages/Dashboard/instructor/AddaClass";
 import MyClasses from "../Pages/Dashboard/instructor/MyClasses";
 import ManageClasses from "../Pages/Dashboard/admin/ManageClasses";
+import InstructorRoute from "./InstructorRoute";
+import AdminRoute from "./AdminRoute";
+import EnrolledClasses from "../Pages/Dashboard/users/EnrolledClasses";
+import StudentRoute from "./StudentRoute";
+import SelectedClasses from "../Pages/Dashboard/users/SelectedClasses";
+import PaymentHistory from "../Pages/Dashboard/users/PaymentHistory";
+import Payment from "../Pages/Dashboard/users/Payment";
+import DashboardHome from "../Pages/Dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -27,11 +35,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/classes",
-        element: (
-          <PrivateRoute>
-            <Classes></Classes>
-          </PrivateRoute>
-        ),
+        element: <Classes></Classes>,
       },
       {
         path: "/login",
@@ -44,32 +48,84 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "dashboard",
+    path: "/dashboard",
     element: (
       <PrivateRoute>
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "/dashboard",
+        element: <DashboardHome />,
+      },
       //admin
       {
         path: "manageUsers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "manageClasses",
-        element: <ManageClasses></ManageClasses>,
+        element: (
+          <AdminRoute>
+            <ManageClasses></ManageClasses>
+          </AdminRoute>
+        ),
       },
       //instructor
       {
         path: "addClass",
-        element: <AddaClass></AddaClass>,
+        element: (
+          <InstructorRoute>
+            <AddaClass></AddaClass>
+          </InstructorRoute>
+        ),
       },
       {
         path: "myClasses",
-        element: <MyClasses></MyClasses>,
+        element: (
+          <InstructorRoute>
+            <MyClasses></MyClasses>
+          </InstructorRoute>
+        ),
       },
       //user
+      {
+        path: "enrolledClasses",
+        element: (
+          <StudentRoute>
+            <EnrolledClasses></EnrolledClasses>
+          </StudentRoute>
+        ),
+      },
+      {
+        path: "selectedClasses",
+        element: (
+          <StudentRoute>
+            <SelectedClasses></SelectedClasses>
+          </StudentRoute>
+        ),
+      },
+      {
+        path: "paymentHistory",
+        element: (
+          <StudentRoute>
+            <PaymentHistory></PaymentHistory>
+          </StudentRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <StudentRoute>
+            <Payment></Payment>
+          </StudentRoute>
+        ),
+      },
     ],
   },
 ]);
