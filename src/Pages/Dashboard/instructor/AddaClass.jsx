@@ -3,83 +3,132 @@ import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import useAxios from "../../../hooks/useAxios";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AddaClass = () => {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const imgbbUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_KEY}`;
   const [axiosSecure] = useAxios();
-  const { register, handleSubmit, reset } = useForm();
-  const onSubmit = data => {
-    const newCourse = {
-      course: data.class,
-      classImg: data.classImg,
-      instructor: user?.displayName,
-      seat: parseInt(data.seat),
-      price: parseFloat(data.price),
-      instructorEmail: user?.email,
-    };
-    axiosSecure.post("/classes", newCourse).then(res => {
-      const data = res.data;
-      if (data?.insertedId) {
-        toast.success(`${newCourse.course} Course Added`, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const addClass = async data => {
+    try {
+      setLoading(true);
+      const { course, classImg, seat, price } = data;
+      if(!classImg[0]?.type?.includes('image'))
+        throw new Error("Please Input valid File");
+        const formData= new FormData();
+        formData.append("image",classImg[0])
+        const imgbbResult=await axios.post(imgbbUrl,formData)
+
+        if(imgbbResult?.data?.data?.display_url){
+          const classImg=imgbbResult?.data?.data?.display_url;
+          const res=await axiosSecure.post('classes',{
+            course,
+            classImg,
+            instructor: user?.displayName,
+            seat,
+            price,
+            instructorEmail:user?.email
+          })
+          if (res.data?.insertedId) {
+            toast.success(`${course} class added`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
+            reset();
+            navigate("/dashboard/myClasses");
+          }
+        }
+    } catch (error) {
+      toast.error(`${error.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
         });
-        reset();
-      }
-    });
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <>
       <SectionHeader header="Add Class" description="Make sure you fulfill all the requirements"></SectionHeader>
-      <form onClick={handleSubmit(onSubmit)} className=" card-body">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Class Name</span>
+      <div className="max-w-4xl mx-auto">
+        <form onSubmit={handleSubmit(addClass)} className="">
+          {/* class name */}
+          <div className="form-control mb-4">
+            <label className="label" htmlFor="name">
+              <span className="label-text text-base">Class Name</span>
             </label>
-            <input type="text" placeholder="class name" className="input input-bordered" {...register("class", { required: true })} />
+            <input type="text" id="name" placeholder="class name" className="input md:py-7 input-bordered border-2 focus:outline-none focus:border-primary" {...register("course", { required: true })} />
+            {errors.course && <span className="text-red-500 text-sm p-1">Class Name is required</span>}
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Class Image URL</span>
+          {/* class image */}
+          <div className="form-control mb-4">
+            <label className="label" htmlFor="image">
+              <span className="label-text text-base">Class Image</span>
             </label>
-            <input type="text" placeholder="class imageURL" className="input input-bordered" {...register("classImg", { required: true })} />
+            <input type="file" id="image" className="file-input border-2 file-input-bordered w-full focus:outline-none" {...register("classImg", { required: true })} />
+            {errors.classImg && <span className="text-red-500 text-sm p-1">Class Image is required</span>}
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Instructor Name</span>
+          {/* Instructor name */}
+          <div className="form-control mb-4">
+            <label className="label" htmlFor="instructorName">
+              <span className="label-text text-base">Instructor Name</span>
             </label>
-            <input type="text" readOnly defaultValue={user?.displayName} placeholder="class imageURL" className="input input-bordered" {...register("instructor", { required: true })} />
+            <input type="text" id="instructorName" placeholder="instructor name" className="input md:py-7 input-bordered border-2 focus:outline-none focus:border-primary" defaultValue={user?.displayName} readOnly />
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Instructor email</span>
+          {/* Instructor email */}
+          <div className="form-control mb-4">
+            <label className="label" htmlFor="instructorEmail">
+              <span className="label-text text-base">Instructor Email</span>
             </label>
-            <input type="text" readOnly defaultValue={user?.email} placeholder="class imageURL" className="input input-bordered" {...register("instructorEmail", { required: true })} />
+            <input type="text" id="instructorEmail" placeholder="instructor email" className="input md:py-7 input-bordered border-2 focus:outline-none focus:border-primary" defaultValue={user?.email} readOnly />
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Price</span>
+          {/* available seats */}
+          <div className="form-control mb-4">
+            <label className="label" htmlFor="seats">
+              <span className="label-text text-base">Available Seats</span>
             </label>
-            <input type="number" placeholder="Course Price" className="input input-bordered" {...register("price", { required: true })} />
+            <input type="number" id="seats" placeholder="available seats" className="input md:py-7 input-bordered border-2 focus:outline-none focus:border-primary" {...register("seat", { required: true })} />
+            {errors.seat && <span className="text-red-500 text-sm p-1">Available Seats is required</span>}
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Seats Counts</span>
+          {/* price */}
+          <div className="form-control mb-4">
+            <label className="label" htmlFor="price">
+              <span className="label-text text-base">Price</span>
             </label>
-            <input type="number" placeholder="seats" className="input input-bordered" {...register("seat", { required: true })} />
+            <input type="text" id="price" placeholder="price" className="input md:py-7 input-bordered border-2 focus:outline-none focus:border-primary" {...register("price", { required: true })} />
+            {errors.price && <span className="text-red-500 text-sm p-1">Price is required</span>}
           </div>
-        </div>
-        <div className="form-control mt-6">
-          <input className="btn bg-red-500 text-white hover:text-black" type="submit" value="Add Class" />
-        </div>
-      </form>
+
+          {/* add class button */}
+          <div className="form-control mb-6">
+            <button disabled={loading} type="submit" className="btn btn-gradient md:btn-lg normal-case md:text-xl disabled:text-white">
+              {loading ? <span className="loading loading-spinner"></span> : "Add Class"}
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

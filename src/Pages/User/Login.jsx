@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const {state} = useLocation();
+  const from = state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,

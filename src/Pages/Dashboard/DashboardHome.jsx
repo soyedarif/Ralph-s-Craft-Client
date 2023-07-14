@@ -9,7 +9,7 @@ const DashboardHome = () => {
     if(role==='instructor')
     return <Navigate to={'myClasses'} replace={true}></Navigate>
     if(role==='student')
-    return <Navigate to={'enrolledClasses'} replace={true}></Navigate>
+    return <Navigate to={'selectedClasses'} replace={true}></Navigate>
 };
 
 export default DashboardHome;

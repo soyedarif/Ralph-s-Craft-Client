@@ -1,9 +1,9 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import logo from "../../assets/website-logo.png";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { FaBars } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import useUserRole from "../../hooks/useUserRole";
 import { MdNightsStay, MdWbSunny } from "react-icons/md";
@@ -18,10 +18,21 @@ const Dashboard = () => {
     <>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
-          <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
-            Open drawer
-          </label>
+        <div className="drawer-content  flex flex-col dark:text-white dark:bg-gradient-to-t from-slate-900 via-[#DA4453] to-slate-900">
+          {/* mobile dashnav */}
+          <div className="flex bg-base-300 justify-between items-center lg:hidden">
+            <Link className="shrink-0" to="/">
+              <div className="flex">
+                <div className="w-10 h-10 grid place-content-center">
+                  <img src={logo} alt="" />
+                </div>
+                <h2 className="text-2xl font-inter grid tracking-tighter place-content-center font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#DA4453] to-[#89216B]">RalphCrafts</h2>
+              </div>
+            </Link>
+            <label htmlFor="my-drawer-2" className="btn btn-ghost bg-inherit drawer-button ">
+              <FaBars />
+            </label>
+          </div>
           {/* Page content here */}
           <Outlet />
         </div>
@@ -73,10 +84,10 @@ const Dashboard = () => {
             {role === "student" && (
               <>
                 <li>
-                  <NavLink to="/dashboard/enrolledClasses">My Enrolled Classes</NavLink>
+                  <NavLink to="/dashboard/selectedClasses">My Selected Classes</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/selectedClasses">My Selected Classes</NavLink>
+                  <NavLink to="/dashboard/enrolledClasses">My Enrolled Classes</NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/paymentHistory">Payment History</NavLink>

@@ -10,7 +10,7 @@ const ManageClasses = () => {
   const [updateId, setUpdateId] = useState(null);
 
   const { data: classes = [], refetch } = useQuery(["manageClasses"], async () => {
-    const res = await axiosSecure.get("/classes");
+    const res = await axiosSecure.get("/all-classes");
     return res.data;
   });
 
@@ -54,7 +54,7 @@ const ManageClasses = () => {
   return (
     <>
       <SectionHeader header="Manage Classes"></SectionHeader>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="table w-full">
           {/* head */}
           <thead>

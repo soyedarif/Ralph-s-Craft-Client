@@ -49,7 +49,7 @@ const AllUsers = () => {
   return (
     <>
       <SectionHeader header="Manage All Users"></SectionHeader>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="table w-full">
           {/* head */}
           <thead>
