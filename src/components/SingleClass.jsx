@@ -6,39 +6,40 @@ import Swal from "sweetalert2";
 import useAxios from "../hooks/useAxios";
 
 const SingleClass = ({ c }) => {
+  const [hover, setHover] = useState(false);
   const { user } = useAuth();
   const { role } = useUserRole();
-  const [axiosSecure]=useAxios()
-  const navigate=useNavigate()
-  const location=useLocation();
-  const {_id, course, instructor, price, seat, classImg } = c;
+  const [axiosSecure] = useAxios();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { _id, course, instructor, price, seat, classImg } = c;
   const [loading, setLoading] = useState(false);
-  const handleBookClass = async() => {
+  const handleBookClass = async () => {
     setLoading(true);
     try {
       if (!user) {
         Swal.fire({
-            icon: "warning",
-            title: "Failed!",
-            text: "Please login first to select a class",
-            showCancelButton: true,
-          }).then(result => {
-            if (result.isConfirmed) {
-              navigate("/login", {
-                state: {from:location},
-              });
-            }
-          });
+          icon: "warning",
+          title: "Failed!",
+          text: "Please login first to select a class",
+          showCancelButton: true,
+        }).then(result => {
+          if (result.isConfirmed) {
+            navigate("/login", {
+              state: { from: location },
+            });
+          }
+        });
       }
-      const res=await axiosSecure.post('/booked-classes',{
-        courseId:_id,
+      const res = await axiosSecure.post("/booked-classes", {
+        courseId: _id,
         course,
         seat,
         price,
         instructor,
         classImg,
-        email:user?.email,
-      })
+        email: user?.email,
+      });
       if (res.data?.message) {
         Swal.fire({
           icon: "error",
@@ -48,14 +49,14 @@ const SingleClass = ({ c }) => {
           position: "center",
         });
       }
-      if(res.data.insertedId){
+      if (res.data.insertedId) {
         Swal.fire({
-            icon: "success",
-            title: "Success!",
-            text: `${course} is selected`,
-            timer: 2000,
-            position: "center",
-          });
+          icon: "success",
+          title: "Success!",
+          text: `${course} is selected`,
+          timer: 2000,
+          position: "center",
+        });
       }
     } catch (error) {
       console.error(error.message);
@@ -64,19 +65,20 @@ const SingleClass = ({ c }) => {
     }
   };
   return (
-    <div className="card w-96 bg-base-100 shadow-xl bg-gradient-to-t from-red-400 to-red-200">
-      <div className="card-body">
-        <h2 className="card-title">{course}</h2>
-        <p>Course Instructor: {instructor}</p>
-        <p>Course Fee: ${price}</p>
-        <p>Seat: {seat}</p>
-        <button onClick={handleBookClass} disabled={!seat || role === "admin" || role === "instructor"} className="btn bg-red-600 text-white hover:text-black">
-          {loading ? <span className="loading loading-spinner" /> : "Select Course"}
-        </button>
+    <div className={`w-96 h-96 [perspective:1000px]`} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}>
+      <div className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] ${hover ? "[transform:rotateY(180deg)]" : ""}`}>
+        <div className="absolute inset-0">
+          <img className="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40" src={classImg} alt="" />
+        </div>
+        <div className="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-12 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+          <div className="flex min-h-full flex-col justify-center items-center">
+            <h3>{course}</h3>
+            <button onClick={handleBookClass} disabled={!seat || role === "admin" || role === "instructor"} className="btn bg-red-600 text-white hover:text-black">
+              {loading ? <span className="loading loading-spinner" /> : "Select Course"}
+            </button>
+          </div>
+        </div>
       </div>
-      <figure className="h-48 w-full">
-        <img src={classImg} />
-      </figure>
     </div>
   );
 };

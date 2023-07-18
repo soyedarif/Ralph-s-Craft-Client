@@ -39,7 +39,7 @@ const Banner = () => {
     },
   ];
   return (
-    <div className=" bg-gradient-to-t from-white dark:from-black via-white dark:via-black dark:to-red-700 to-red-700">
+    <div className=" bg-gradient-to-t banner-section from-white dark:from-black via-white dark:via-black dark:to-red-700 to-red-700">
       <div className="max-w-screen-xl mx-auto">
         <Swiper
           slidesPerView={1}
@@ -59,15 +59,15 @@ const Banner = () => {
           {bannerContents.map((slideContent, i) => (
             <SwiperSlide key={slideContent.id} virtualIndex={i}>
               <div className="flex lg:py-20 flex-col md:flex-row h-full w-full gap-2 p-4 md:gap-8 justify-center items-center mb-14">
-              <div className="w-full  md:w-1/2 bg-gradient-to-b from-white dark:from-black dark:to-[#DA4453] to-[#DA4453] p-3">
+              <div className="w-full  md:w-1/2 glass p-3">
                   <img className="object-cover mx-auto w-[37.5rem] h-[24.938rem]" src={slideContent.src} alt="" />
                 </div>
                 <div className="w-full md:w-1/2">
-                  <h1 className="text-4xl tracking-tight dark:text-white text-slate-700 font-semibold mb-3 leading-none md:leading-tight">
-                    Unleash Your Creativity <br /> with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DA4453] to-[#89216B]">Ralph Crafts {slideContent.topic}</span>
+                  <h1 className="text-4xl tracking-tight text-gray-100 font-semibold mb-3 leading-none md:leading-tight">
+                    Unleash Your Creativity <br /> with <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#DA4453] to-[#D71D24]">Ralph Crafts {slideContent.topic}</span>
                   </h1>
-                  <p className="mb-4 text-gray-700 dark:text-gray-300 font-semibold">
-                    Embrace the art of <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DA4453] to-[#89216B]">{slideContent.topic}</span> and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.
+                  <p className="mb-4 dark:text-gray-300 text-gray-700 font-medium">
+                    Embrace the art of <span className="text-transparent bg-clip-text font-bold bg-gradient-to-b from-[#DA4453] to-[#D71D24]">{slideContent.topic}</span> and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.
                   </p>
                   <button className="btn hover:scale-105 duration-200 border-0 bg-gradient-to-r from-[#DA4453] to-[#89216B] text-white">Learn More</button>
                 </div>

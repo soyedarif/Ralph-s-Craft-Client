@@ -16,13 +16,13 @@ const Classes = () => {
   }, []);
 
   return (
-    <>
+    <div className="max-w-screen-xl mx-auto">
       <div className="grid md:grid-rows-2 gap-4 lg:grid-cols-3">
         {courses.map(c => (
           <SingleClass key={c._id} c={c}></SingleClass>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main/Main";
-import Home from "../Pages/Home/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors/Instructors";
 import Classes from "../Pages/Classes/Classes/Classes";
 import Login from "../Pages/User/Login";
@@ -19,6 +18,7 @@ import SelectedClasses from "../Pages/Dashboard/users/SelectedClasses";
 import PaymentHistory from "../Pages/Dashboard/users/PaymentHistory";
 import Payment from "../Pages/Dashboard/users/Payments/Payment";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
+import Home from "../Pages/Home/Home";
 
 export const router = createBrowserRouter([
   {
