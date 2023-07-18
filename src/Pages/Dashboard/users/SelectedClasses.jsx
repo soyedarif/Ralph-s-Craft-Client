@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 import Swal from "sweetalert2";
+import {  useNavigate } from "react-router-dom";
 
 const SelectedClasses = () => {
   const { user } = useAuth();
   const [axiosSecure] = useAxios();
+  const navigate = useNavigate();
   const {
     data: selectedClasses = [],
     isLoading,
@@ -26,14 +28,19 @@ const SelectedClasses = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then(async(result) => {
+    }).then(async result => {
       if (result.isConfirmed) {
-          const res=await axiosSecure.delete(`/booked-classes/${id}`)
-          if (res.data?.deletedCount){
-            refetch()
-              Swal.fire("Deleted!", "Your Course has been deleted.", "success");
+        const res = await axiosSecure.delete(`/booked-classes/${id}`);
+        if (res.data?.deletedCount) {
+          refetch();
+          Swal.fire("Deleted!", "Your Course has been deleted.", "success");
         }
       }
+    });
+  };
+  const handlePayment = course => {
+    navigate("/dashboard/payment", {
+      state: course,
     });
   };
 
@@ -71,9 +78,14 @@ const SelectedClasses = () => {
                 <td>{course.price}</td>
                 <td>{course.seat}</td>
                 <th className="space-x-3">
-                  <button className="btn border-0 bg-gradient-to-r from-green-500 via-green-600 to-green-700 
-                 text-white btn-xs">Purchase</button>
-                  <button onClick={() => handleDelete(course._id)} className="btn border-0 bg-gradient-to-r from-[#DA4453] to-[#89216B] btn-xs text-white">
+                  <button onClick={()=>handlePayment(course)}
+                    className="btn border-0 hover:scale-105 duration-200 bg-gradient-to-r from-green-500 via-green-600 to-green-700 
+    text-white btn-xs"
+                  >
+                    Purchase
+                  </button>
+
+                  <button onClick={() => handleDelete(course._id)} className="btn border-0 hover:scale-105 duration-200 bg-gradient-to-r from-[#DA4453] to-[#89216B] btn-xs text-white">
                     Delete
                   </button>
                 </th>

@@ -7,7 +7,7 @@ const Classes = () => {
   useEffect(() => {
     // Simulating the API call to fetch the data
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:5000/all-classes`);
+      const response = await fetch(`https://ralph-crafts-server.vercel.app/all-classes`);
       const data = await response.json();
       const approvedCourses = data.filter(course => course.status === "approved");
       setCourses(approvedCourses);

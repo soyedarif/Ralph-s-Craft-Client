@@ -18,9 +18,9 @@ const Dashboard = () => {
     <>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content  flex flex-col dark:text-white dark:bg-gradient-to-t from-slate-900 via-[#DA4453] to-slate-900">
+        <div className="drawer-content  flex flex-col dark:text-white ">
           {/* mobile dashnav */}
-          <div className="flex bg-base-300 justify-between items-center lg:hidden">
+          <div className="flex dark:bg-black bg-base-300 justify-between items-center lg:hidden">
             <Link className="shrink-0" to="/">
               <div className="flex">
                 <div className="w-10 h-10 grid place-content-center">
