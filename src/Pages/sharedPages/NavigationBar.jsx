@@ -43,7 +43,7 @@ const NavigationBar = ({ darkMode, toggleMode }) => {
   ];
 
   return (
-    <div className="z-20 fixed w-full top-0 dark:bg-black bg-white bg-opacity-90">
+    <div className="z-20 fixed w-full top-0 dark:bg-black bg-white bg-opacity-90 dark:bg-opacity-90">
       <div className="max-w-screen-xl mx-auto flex justify-between items-center h-[3.313rem]">
         <Link className="shrink-0" to="/">
           <div className="flex">

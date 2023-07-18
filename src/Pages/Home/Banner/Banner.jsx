@@ -1,96 +1,82 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+// import { Autoplay,  } from "swiper";
+import { Autoplay, Pagination, Virtual } from "swiper";
 
-import { Pagination } from "swiper";
-import banner1 from "../../../assets/banner/banner1.jpg";
-import banner2 from "../../../assets/banner/banner2.jpg";
-import banner3 from "../../../assets/banner/banner3.jpg";
-import banner4 from "../../../assets/banner/banner4.jpg";
-import banner5 from "../../../assets/banner/banner5.jpg";
+import banner1 from "/src/assets/banner/banner1.jpg";
+import banner2 from "/src/assets/banner/banner2.jpg";
+import banner3 from "/src/assets/banner/banner3.jpg";
+import banner4 from "/src/assets/banner/banner4.jpg";
+import banner5 from "/src/assets/banner/banner5.jpg";
 
 const Banner = () => {
+  const bannerContents = [
+    {
+      id: 1,
+      src: banner1,
+      topic: "Pottery",
+    },
+    {
+      id: 2,
+      src: banner2,
+      topic: "Drawings",
+    },
+    {
+      id: 3,
+      src: banner3,
+      topic: "Origami",
+    },
+    {
+      id: 4,
+      src: banner4,
+      topic: "Life Hacks",
+    },
+    {
+      id: 5,
+      src: banner5,
+      topic: "Clay Arts",
+    },
+  ];
   return (
-    <>
-      <Swiper
-        pagination={{
-          dynamicBullets: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <figure className="relative w-full h-[34.375rem]">
-            <div className="absolute w-full md:w-1/2 z-10 top-1/2 -translate-y-1/2 text-gray-50 p-9">
-              <h1 className="text-4xl font-semibold mb-3 leading-snug">
-              Unleash Your Creativity <br /> with Ralph Crafts Pottery <br /> at <span className=" p-1 bg-gray-800 rounded-lg bg-opacity-50">Our Summer Camp</span>
-              
-              </h1>
-              <p className="mb-4 text-gray-800 font-semibold">Embrace the art of pottery and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.</p>
-              <button className="btn hover:text-black bg-red-800 border-0 text-white">Learn More</button>
-            </div>
-            <img className="object-cover" src={banner1} alt="" />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white"></div>
-          </figure>
-        </SwiperSlide>
-        <SwiperSlide>
-          <figure className="relative w-full h-[34.375rem]">
-          <div className="absolute w-full md:w-1/2 z-10 top-1/2 -translate-y-1/2 text-gray-50 p-9">
-              <h1 className="text-4xl font-semibold mb-3 leading-snug">
-              Unleash Your Creativity <br /> with Ralph Crafts Drawings
-              <br /> at <span className=" p-1 bg-gray-800 rounded-lg bg-opacity-50">Our Summer Camp</span>
-              </h1>
-              <p className="mb-4 text-gray-800 font-semibold">Embrace the art of drawing and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.</p>
-              <button className="btn hover:text-black bg-red-800 border-0 text-white">Learn More</button>
-            </div>
-            <img className="object-cover" src={banner2} alt="" />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white"></div>
-          </figure>
-        </SwiperSlide>
-        <SwiperSlide>
-          <figure className="relative w-full h-[34.375rem]">
-          <div className="absolute w-full md:w-1/2 z-10 top-1/2 -translate-y-1/2 text-gray-50 p-9">
-              <h1 className="text-4xl font-semibold mb-3 leading-snug">
-              Unleash Your Creativity <br /> with Ralph Crafts Origami
-              <br /> at <span className=" p-1 bg-gray-800 rounded-lg bg-opacity-50">Our Summer Camp</span>
-              </h1>
-              <p className="mb-4 text-gray-800 font-semibold">Embrace the art of origami and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.</p>
-              <button className="btn hover:text-black bg-red-800 border-0 text-white">Learn More</button>
-            </div>
-            <img className="object-cover" src={banner3} alt="" />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white"></div>
-          </figure>
-        </SwiperSlide>
-        <SwiperSlide>
-          <figure className="relative w-full h-[34.375rem]">
-          <div className="absolute w-full md:w-1/2 z-10 top-1/2 -translate-y-1/2 text-gray-50 p-9">
-              <h1 className="text-4xl font-semibold mb-3 leading-snug">
-              Unleash Your Creativity <br /> with Ralph Crafts Life Hacks
-              <br /> at <span className=" p-1 bg-gray-800 rounded-lg bg-opacity-50">Our Summer Camp</span>
-              </h1>
-              <p className="mb-4 text-gray-800 font-semibold">Embrace the art of Life Hacks and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.</p>
-              <button className="btn hover:text-black bg-red-800 border-0 text-white">Learn More</button>
-            </div>
-            <img className="object-cover" src={banner4} alt="" />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white"></div>
-          </figure>
-        </SwiperSlide>
-        <SwiperSlide>
-          <figure className="relative w-full h-[34.375rem]">
-          <div className="absolute w-full md:w-1/2 z-10 top-1/2 -translate-y-1/2 text-gray-50 p-9">
-              <h1 className="text-4xl font-semibold mb-3 leading-snug">
-              Unleash Your Creativity <br /> with Ralph Crafts Clay Arts
-              <br /> at <span className=" p-1 bg-gray-800 rounded-lg bg-opacity-50">Our Summer Camp</span>
-              </h1>
-              <p className="mb-4 text-gray-800 font-semibold">Embrace the art of Clay Arts and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.</p>
-              <button className="btn hover:text-black bg-red-800 border-0 text-white">Learn More</button>
-            </div>
-            <img className="object-cover" src={banner5} alt="" />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white"></div>
-          </figure>
-        </SwiperSlide>
-      </Swiper>
-    </>
+    <div className=" bg-gradient-to-t from-white dark:from-black via-white dark:via-black dark:to-red-700 to-red-700">
+      <div className="max-w-screen-xl mx-auto">
+        <Swiper
+          slidesPerView={1}
+          centeredSlides={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          loop={true}
+          modules={[Autoplay, Virtual, Pagination]}
+          className="mySwiper text-center md:text-left"
+          virtual
+        >
+          {bannerContents.map((slideContent, i) => (
+            <SwiperSlide key={slideContent.id} virtualIndex={i}>
+              <div className="flex lg:py-20 flex-col md:flex-row h-full w-full gap-2 p-4 md:gap-8 justify-center items-center mb-14">
+              <div className="w-full  md:w-1/2 bg-gradient-to-b from-white dark:from-black dark:to-[#DA4453] to-[#DA4453] p-3">
+                  <img className="object-cover mx-auto w-[37.5rem] h-[24.938rem]" src={slideContent.src} alt="" />
+                </div>
+                <div className="w-full md:w-1/2">
+                  <h1 className="text-4xl tracking-tight dark:text-white text-slate-700 font-semibold mb-3 leading-none md:leading-tight">
+                    Unleash Your Creativity <br /> with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DA4453] to-[#89216B]">Ralph Crafts {slideContent.topic}</span>
+                  </h1>
+                  <p className="mb-4 text-gray-700 dark:text-gray-300 font-semibold">
+                    Embrace the art of <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DA4453] to-[#89216B]">{slideContent.topic}</span> and more with Ralph Crafts. Let your creativity soar to new heights under the expert guidance of our dedicated instructors. Join us today and embark on an unforgettable artistic journey that will leave a lasting impression.
+                  </p>
+                  <button className="btn hover:scale-105 duration-200 border-0 bg-gradient-to-r from-[#DA4453] to-[#89216B] text-white">Learn More</button>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </div>
   );
 };
 

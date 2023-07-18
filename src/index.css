@@ -6,7 +6,16 @@ body {
     @apply min-h-screen font-inter overflow-x-hidden;
   }
 
+  
+.swiper-pagination-bullet{
+  border-radius: 25% !important;
+  width: 2rem !important;
 
+}
+  
+.swiper-pagination-bullet-active{
+  background-color: #DA4453 !important;
+}
 
   .StripeElement,
 .StripeElementIdeal,
