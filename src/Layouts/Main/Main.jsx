@@ -9,7 +9,7 @@ const Main = () => {
     <>
       <div className={darkMode ? "dark" : ""}>
         <NavigationBar darkMode={darkMode} toggleMode={toggleMode}></NavigationBar>
-        <div className="min-h-[calc(100vh-136px)] dark:bg-black" style={{ marginTop: "3.313rem" }}>
+        <div className=" dark:bg-black" style={{ marginTop: "3.313rem" }}>
           <Outlet />
         </div>
         <ScrollRestoration/>

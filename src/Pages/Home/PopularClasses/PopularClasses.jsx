@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import SectionHeader from "../../../components/SectionHeader";
 import SingleClass from "../../../components/SingleClass";
 import { Link } from "react-router-dom";
+import Loader from "../../../components/utilities/Loader";
 
 const PopularClasses = () => {
     const {data:courses=[],isLoading}=useQuery(["all-classes"], async () => {
@@ -11,9 +12,9 @@ const PopularClasses = () => {
         const mostEnrolled= data?.sort((a, b) => (a.enrolled > b.enrolled ? -1 : 1))
         return mostEnrolled;
     })
-
+    if(isLoading)return <Loader></Loader>
     return (
-        <div className="mb-32">
+        <div className="mb-20">
             <SectionHeader header="Choose Your Desired Course" description="Try from our most enrolled courses for your learning journey"></SectionHeader>
             <div className="grid mb-10 md:grid-cols-2 gap-7 p-4 lg:grid-cols-3">
                 {

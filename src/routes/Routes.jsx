@@ -19,10 +19,12 @@ import PaymentHistory from "../Pages/Dashboard/users/PaymentHistory";
 import Payment from "../Pages/Dashboard/users/Payments/Payment";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
 import Home from "../Pages/Home/Home";
+import ErrorPage from "../components/utilities/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    errorElement:<ErrorPage/>,
     element: <Main></Main>,
     children: [
       {

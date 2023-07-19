@@ -6,7 +6,7 @@ const Instructor = ({ instructor }) => {
   const { name, email, photoURL } = instructor;
   return (
     <>
-      <div className={`w-[21.875rem] relative rounded-2xl overflow-hidden h-[28.125rem]`} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}>
+      <div className={`w-[21.875rem] relative mx-auto rounded-2xl overflow-hidden h-[28.125rem]`} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}>
         <div className="w-full  h-full">
           <img className={`w-full duration-300 h-full object-cover ${hover ? 'scale-110':''}`} src={photoURL} />
         </div>
