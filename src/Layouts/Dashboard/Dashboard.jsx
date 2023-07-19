@@ -8,17 +8,18 @@ import useAuth from "../../hooks/useAuth";
 import useUserRole from "../../hooks/useUserRole";
 import { MdNightsStay, MdWbSunny } from "react-icons/md";
 import useDarkMode from "../../hooks/userDarkMode";
+import Loader from "../../components/utilities/Loader";
 
 const Dashboard = () => {
   const { darkMode, toggleMode } = useDarkMode();
   const { user, userLoading } = useAuth();
   const { role, isRoleLoading } = useUserRole();
-  if (userLoading || isRoleLoading) return <progress className="progress w-56"></progress>;
+  if (userLoading || isRoleLoading) return <Loader/>;
   return (
     <>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer  lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content  flex flex-col dark:text-white ">
+        <div className="drawer-content dark:bg-gray-900  flex flex-col  ">
           {/* mobile dashnav */}
           <div className="flex dark:bg-black bg-base-300 justify-between items-center lg:hidden">
             <Link className="shrink-0" to="/">

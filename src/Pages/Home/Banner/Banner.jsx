@@ -39,7 +39,7 @@ const Banner = () => {
     },
   ];
   return (
-    <div className=" bg-gradient-to-t banner-section from-white dark:from-black via-white dark:via-black dark:to-red-700 to-red-700">
+    <div className=" bg-gradient-to-t banner-section mb-32 from-white dark:from-black via-white dark:via-black dark:to-red-700 to-red-700">
       <div className="max-w-screen-xl mx-auto">
         <Swiper
           slidesPerView={1}

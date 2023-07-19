@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import NavigationBar from "../../Pages/sharedPages/NavigationBar";
 import Footer from "../../Pages/sharedPages/Footer";
 import useDarkMode from "../../hooks/userDarkMode";
@@ -12,6 +12,7 @@ const Main = () => {
         <div className="min-h-[calc(100vh-136px)] dark:bg-black" style={{ marginTop: "3.313rem" }}>
           <Outlet />
         </div>
+        <ScrollRestoration/>
         <Footer></Footer>
       </div>
     </>
