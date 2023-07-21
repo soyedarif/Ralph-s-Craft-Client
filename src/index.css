@@ -6,6 +6,12 @@ body {
     @apply min-h-screen font-inter overflow-x-hidden;
   }
 
+.swiper-button-next:after,.swiper-button-prev:after{
+  font-size: 25px !important;
+font-weight: 900;
+color: #89216B;
+}
+
 .banner-section{
   position: relative;
   overflow: hidden;
@@ -72,3 +78,5 @@ transform: scaleX(1.5);
 .StripeElementFpx {
   padding: 0;
 }
+
+
