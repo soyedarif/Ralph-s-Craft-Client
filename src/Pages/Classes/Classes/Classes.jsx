@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
 import SingleClass from "../../../components/SingleClass";
 import Loader from "../../../components/utilities/Loader";
+import PageHeader from "../../../components/utilities/PageHeader";
+import { Link } from "react-router-dom";
 
 const Classes = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   // Simulating the API call to fetch the data
-  //   const fetchData = async () => {
-  //     const response = await fetch(`https://ralph-crafts-server.vercel.app/all-classes`);
-  //     const data = await response.json();
-  //     const approvedCourses = data.filter(course => course.status === "approved");
-  //     setCourses(approvedCourses);
-  //   };
-  //   fetchData();
-  // }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +31,13 @@ const Classes = () => {
     return <Loader/>
   }
   return (
+    <>
+    <PageHeader heading="Our Classes">
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>Classes</li>
+      </PageHeader>
     <div className="max-w-screen-xl mx-auto">
       <div className="grid p-4 md:grid-cols-2 gap-7 lg:grid-cols-3">
         {courses.map(c => (
@@ -45,6 +45,7 @@ const Classes = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

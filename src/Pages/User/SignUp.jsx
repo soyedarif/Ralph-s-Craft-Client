@@ -9,8 +9,45 @@ const SignUp = () => {
   const { createNewUser, updateUserProfile } = useAuth();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { googleSignIn } = useAuth();
 
   const navigate = useNavigate();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await googleSignIn();
+      const{displayName,email,photoURL}=result.user;
+
+      setLoading(true);
+
+      const savedUser = { displayName, email, photoURL };
+      const res = await fetch(`https://ralph-crafts-server.vercel.app/users`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(savedUser),
+      });
+
+      const responseData = await res.json();
+      if (responseData.insertedId) {
+        reset();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "New User Created",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const {
     register,
@@ -19,17 +56,17 @@ const SignUp = () => {
     formState: { errors },
     watch,
   } = useForm();
-  
-  const onSubmit = async (data) => {
+
+  const onSubmit = async data => {
     try {
-      setLoading(true)
+      setLoading(true);
       console.log(data);
       const result = await createNewUser(data.email, data.password);
       const createdUser = result.user;
       console.log(createdUser);
       // updateUserProfile();
       await updateUserProfile(data.name, data.photoURL);
-  
+
       const savedUser = { name: data.name, email: data.email, photoURL: data.photoURL };
       const res = await fetch(`https://ralph-crafts-server.vercel.app/users`, {
         method: "POST",
@@ -38,7 +75,7 @@ const SignUp = () => {
         },
         body: JSON.stringify(savedUser),
       });
-      
+
       const responseData = await res.json();
       if (responseData.insertedId) {
         reset();
@@ -54,13 +91,12 @@ const SignUp = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
-  
+
   return (
     <>
-
       <div className="max-w-2xl mx-auto mb-0 ">
         <div className="bg-white  pt-20  shadow-md p-20 mt-5">
           <SectionHeader header="Sign Up Now" />
@@ -125,7 +161,7 @@ const SignUp = () => {
             <div className="text-center my-4">
               <span className="content-style">OR</span>
             </div>
-            <button onClick={""} className="btn btn-outline  w-full mt-5">
+            <button onClick={() => handleGoogleSignIn()} className="btn btn-outline  w-full mt-5">
               <FaGoogle className="text-green-500 text-4xl pe-3" /> <span className="">Login with Google</span>
             </button>
           </div>

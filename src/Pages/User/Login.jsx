@@ -15,12 +15,12 @@ const Login = () => {
 
   const from = state?.from?.pathname || "/";
 
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const onSubmit = data => {
     try {
       setLoading(true);

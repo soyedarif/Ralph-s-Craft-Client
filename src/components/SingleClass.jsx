@@ -65,7 +65,7 @@ const SingleClass = ({ c }) => {
     }
   };
   return (
-    <div className={`w-96 h-96 mx-auto [perspective:1000px]`} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}>
+    <div className={`w-96 h-96 mx-auto [perspective:1000px]`} data-aos="fade-right" onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}>
       <div className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] ${hover ? "[transform:rotateY(180deg)]" : ""}`}>
         <div className="absolute inset-0">
           <img className="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40" src={classImg} alt="" />

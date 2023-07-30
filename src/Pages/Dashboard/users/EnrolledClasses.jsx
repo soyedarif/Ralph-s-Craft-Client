@@ -1,12 +1,17 @@
 import moment from "moment/moment";
 import useEnrolledClasses from "../../../hooks/useEnrolledClasses";
+import SectionHeader from "../../../components/SectionHeader";
+import useAuth from "../../../hooks/useAuth";
 
 const EnrolledClasses = () => {
-  const { enrolledClasses, isLoading } = useEnrolledClasses();
+  const { user } = useAuth();
+
+  const { enrolledClasses } = useEnrolledClasses();
   console.log(enrolledClasses);
 
   return (
     <>
+    <SectionHeader header={`Classes Enrolled By ${user.displayName}`}></SectionHeader>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

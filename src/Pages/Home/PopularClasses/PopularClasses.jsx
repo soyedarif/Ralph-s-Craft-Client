@@ -16,14 +16,15 @@ const PopularClasses = () => {
     return (
         <div className="mb-20">
             <SectionHeader header="Choose Your Desired Course" description="Try from our most enrolled courses for your learning journey"></SectionHeader>
-            <div className="grid mb-10 md:grid-cols-2 gap-7 p-4 lg:grid-cols-3">
+            <div className="grid mb-10 md:grid-cols-2 gap-7 p-4 lg:grid-cols-3 " data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                 {
                     courses.map(c=>(
                         <SingleClass key={c._id} c={c}></SingleClass>
                     ))
                 }
             </div>
-            <div className="text-center">
+            <div className="text-center" >
                 <Link to='classes' className=" hover:scale-105 btn duration-200 border-0 bg-gradient-to-r from-[#DA4453] to-[#89216B] text-white">
                   Show More
                 </Link>

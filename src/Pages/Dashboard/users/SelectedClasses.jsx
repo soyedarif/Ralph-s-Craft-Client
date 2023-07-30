@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 import Swal from "sweetalert2";
 import {  useNavigate } from "react-router-dom";
+import SectionHeader from "../../../components/SectionHeader";
 
 const SelectedClasses = () => {
   const { user } = useAuth();
@@ -10,7 +11,7 @@ const SelectedClasses = () => {
   const navigate = useNavigate();
   const {
     data: selectedClasses = [],
-    isLoading,
+    
     refetch,
   } = useQuery({
     queryKey: ["booked-classes", user?.email],
@@ -46,6 +47,8 @@ const SelectedClasses = () => {
 
   return (
     <div>
+          <SectionHeader header={`Classes Selected By ${user.displayName}`}></SectionHeader>
+
       <div className="overflow-x-auto">
         <table className="table w-full">
           {/* head */}

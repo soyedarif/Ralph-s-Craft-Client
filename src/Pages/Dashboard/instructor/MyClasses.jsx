@@ -17,24 +17,58 @@ const MyClasses = () => {
   return (
     <>
       <SectionHeader header={`Classes added By ${user.displayName}`}></SectionHeader>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 p-6">
-        {myClasses.map(course => (
-          <div key={course._id} className="card card-compact w-96 bg-base-100 shadow-xl">
-            <figure>
-              <img src={course.classImg} className="h-32 w-full object-cover" alt="Shoes" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{course.course}</h2>
-              <p>Status: {course.status}</p>
-              <p>Student Enrolled: {course?.enrolled || 0}</p>
-              <p>FeedBack: {course?.feedback || ""}</p>
-              <div className="card-actions justify-end">
-                <button className="btn bg-red-600 text-white hover:text-black">Update</button>
+      
+        <div className="overflow-x-auto">
+  <table className="table dark:text-white">
+    {/* head */}
+    <thead className="dark:text-white">
+      <tr>
+        <th>
+          #
+        </th>
+        <th>Course</th>
+        <th>Status</th>
+        <th>Total Enrolled</th>
+        <th>Feedback</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {myClasses.map((course,i) =>( <tr key={course._id}>
+        <th>
+          <span>{i+1}</span>
+        </th>
+        <td>
+          <div className="flex items-center space-x-3">
+            <div className="avatar">
+              <div className="mask mask-squircle w-12 h-12">
+                <img src={course.classImg} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
+            <div>
+              <div className="font-bold">{course.course}</div>
+              <div className="text-sm opacity-50">{course.instructor}</div>
+            </div>
           </div>
-        ))}
-      </div>
+        </td>
+        <td>
+         {course.status}
+        </td>
+        <td>{course.enrolled}</td>
+        <th>
+          {course.feedback}
+        </th>
+        <th>
+          <button className="btn btn-xs">Update</button>
+        </th>
+      </tr>))}
+     
+    </tbody>
+
+    
+  </table>
+</div>
+     
     </>
   );
 };
