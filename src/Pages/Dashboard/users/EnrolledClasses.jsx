@@ -8,6 +8,7 @@ const EnrolledClasses = () => {
 
   const { enrolledClasses } = useEnrolledClasses();
   console.log(enrolledClasses);
+  
 
   return (
     <>
