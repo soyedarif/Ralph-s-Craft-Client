@@ -6,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 const EnrolledClasses = () => {
   const { user } = useAuth();
 
+  
   const { enrolledClasses } = useEnrolledClasses();
   console.log(enrolledClasses);
 
